@@ -58,7 +58,7 @@ def create_platform_event(temp):
 		"Ideal_Temperature__c" : temp
 		}
 
-	r = requests.post(instance_url+'/services/data/v44.0/sobjects/Ideal_Temperature__e', headers=headers, json=data, timeout=10)
+	r = requests.post(instance_url+'/services/data/v44.0/sobjects/Ideal_Temperature_Event__e', headers=headers, json=data, timeout=10)
 	# print(r)
 
 if __name__ == "__main__":
