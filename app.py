@@ -1,6 +1,6 @@
 from flask import Flask, render_template, session, redirect, url_for
 from flask_wtf import FlaskForm
-from wtforms import DecimalField,SubmitField
+from wtforms import IntegerField,SubmitField
 from wtforms.validators import DataRequired
 import requests
 import os
@@ -25,7 +25,7 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ['SECRET_KEY']
 
 class TempForm(FlaskForm):
-	temp = DecimalField("Enter your ideal office temperature.", validators=[DataRequired()])
+	temp = IntegerField("Enter your ideal office temperature. Round to the nearest whole number.", validators=[DataRequired()])
 	submit = SubmitField("Submit")
 
 @app.route('/',methods=['GET','POST'])
