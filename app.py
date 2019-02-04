@@ -25,41 +25,47 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ['SECRET_KEY']
 
 class TempForm(FlaskForm):
-	temp = IntegerField("Enter your ideal office temperature. Round to the nearest whole number.", validators=[DataRequired()])
+	max_temp = IntegerField("Set the maximum temperature for your comfort zone.", validators=[DataRequired()])
+	min_temp = IntegerField("Set the minimum temperature for your comfort zone.", validators=[DataRequired()])
 	submit = SubmitField("Submit")
 
 @app.route('/',methods=['GET','POST'])
 def home():
-	temp = False
+	max_temp = False
+	min_temp = False
 
 	form = TempForm()
 
 	if form.validate_on_submit():
-		temp = form.temp.data
-		create_platform_event(temp)
-		session['temp'] = form.temp.data
-		form.temp.data = ''
+		max_temp = form.max_temp.data
+		min_temp = form.min_temp.data
+		create_platform_event(min_temp, max_temp)
+		session['max_temp'] = form.max_temp.data
+		session['min_temp'] = form.min_temp.data
+		form.max_temp.data = ''
+		form.min_temp.data = ''
 		return redirect(url_for('thank_you'))
 
-	return render_template('home.html',form=form,temp=temp)
+	return render_template('home.html',form=form, max_temp=max_temp, min_temp=min_temp)
 
 @app.route('/thankyou')
 def thank_you():
 
     return render_template('thank_you.html')
 
-def create_platform_event(temp):
+def create_platform_event(min_temp, max_temp):
 	headers = {
 		"Content-type": "application/json",
 		"Authorization": "Bearer %s" % access_token
 		}
 	data = {
-		"Coworker_Name__c" : "Mark Blatnik",
-		"Ideal_Temperature__c" : temp
+		"deskId__c" : "0634",
+		"MAX_TEMPERATURE__c" : max_temp,
+		"MIN_TEMPERATURE__c" : min_temp
 		}
 
-	r = requests.post(instance_url+'/services/data/v44.0/sobjects/Ideal_Temperature_Event__e', headers=headers, json=data, timeout=10)
-	# print(r)
+	r = requests.post(instance_url+'/services/data/v44.0/sobjects/Temp_Global_Variable__e', headers=headers, json=data, timeout=10)
+	print(r)
 
 if __name__ == "__main__":
 	app.run()

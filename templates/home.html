@@ -8,20 +8,25 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
-    <title>Ideal Temperature</title>
+    <title>Comfort Zone Settings</title>
   </head>
   <body>
     <div class="jumbotron">
-      <h1 class="display-4">Ideal Temperature App</h1>
+      <h1 class="display-4">Comfort Zone Settings</h1>
       <hr class="my-4">
-      <p>The value entered here will be updated on the Mark Blatnik record in Salesforce.</p>
+      <p>The values entered here will be used to determine your comfort zone.</p>
       <p class="lead">
         <form method="POST">
             {{ form.hidden_tag() }}
           <div class="form-group">
-            {{ form.temp.label }}
+            {{ form.max_temp.label }}
             <br>
-            {{ form.temp() }}
+            {{ form.max_temp() }}
+            <br>
+            {{ form.min_temp.label }}
+            <br>
+            {{ form.min_temp() }}
+            <br>
             {{ form.submit() }}
           </div>
         </form>

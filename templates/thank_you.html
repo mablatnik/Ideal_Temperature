@@ -8,14 +8,15 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
-    <title>Ideal Temperature</title>
+    <title>Comfort Zone Settings</title>
   </head>
   <body>
     <div class="jumbotron">
-      <h1 class="display-4">Ideal Temperature App</h1>
+      <h1 class="display-4">Comfort Zone Settings</h1>
       <hr class="my-4">
-      <p>You described your ideal office temperature as <b>{{session['temp']}}</b>. Feel free to change your mind.</p>
-      <a href="https://idealtemperature.herokuapp.com/" class="btn btn-info" role="button">I changed my mind.</a>
+      <p>You described your minimum temperature for comfort as <b>{{session['min_temp']}}</b></p>
+      <p>You described your maximum temperature for comfort as <b>{{session['max_temp']}}</b></p>
+      <a href="https://idealtemperature.herokuapp.com/" class="btn btn-info" role="button">Adjust Comfort Zone</a>
     </div>
   </body>
 </html>
