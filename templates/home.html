@@ -19,13 +19,14 @@
         <form method="POST">
             {{ form.hidden_tag() }}
           <div class="form-group">
+            {{ form.min_temp.label }}
+            <br>
+            {{ form.min_temp() }}
+            <br>
             {{ form.max_temp.label }}
             <br>
             {{ form.max_temp() }}
             <br>
-            {{ form.min_temp.label }}
-            <br>
-            {{ form.min_temp() }}
             <br>
             {{ form.submit() }}
           </div>
